@@ -39,12 +39,12 @@
 **Метрика качества**
 Результаты оцениваются по метрике MAPE.  
 MAPE  (Mean Percentage Absolute Error) расшифровывается выражение как средняя абсолютная ошибка в процентах.
-<img src="https://latex.codecogs.com/gif.latex?MAPE=\frac{1}{n}\sum_{t=1}^{n}\frac{\left | Y_t-\hat{Y_t} \right |}{Y_t}" /> 
+<img src="https://latex.codecogs.com/png.latex?\large&space;MAPE=\frac{1}{n}\sum_{t=1}^{n}\frac{\left&space;|&space;Y_t-\hat{Y_t}&space;\right&space;|}{Y_t}" title="\large MAPE=\frac{1}{n}\sum_{t=1}^{n}\frac{\left | Y_t-\hat{Y_t} \right |}{Y_t}" />
 ,  
 где:  
-- $Y_t$ — фактическое значение за анализируемый период;  
-- $\hat{Y_t}$ — значение прогнозной модели за анализируемый период;  
-- $n$ — количество периодов.  
+- Y_t — фактическое значение за анализируемый период;  
+- Y_t_hat — значение прогнозной модели за анализируемый период;  
+- n — количество периодов.  
 :arrow_up:[к оглавлению](https://github.com/dst10rds6/rds6/blob/master/README.md#Оглавление)
 
 ### Краткая информация о данных
