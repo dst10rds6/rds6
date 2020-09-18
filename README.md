@@ -5,7 +5,7 @@
 
 ## Оглавление  
 [1. Описание проекта](https://github.com/dst10rds6/rds6/blob/master/README.md#Описание-проекта)  
-[2. Какой кейс решаем?](https://github.com/dst10rds6/rds6/blob/master/README.md#Какой-кейс-решаем?)  
+[2. Какой кейс решаем?](https://github.com/dst10rds6/rds6/blob/master/README.md#Какой-кейс-решаем)  
 [3. Краткая информация о данных](https://github.com/dst10rds6/rds6/blob/master/README.md#Краткая-информация-о-данных)  
 [3. Этапы работы над проектом](https://github.com/dst10rds6/rds6/blob/master/README.md#Этапы-работы-над-проектом)  
 [4. Результат](https://github.com/dst10rds6/rds6/blob/master/README.md#Результат)  
