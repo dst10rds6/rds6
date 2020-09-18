@@ -38,7 +38,7 @@
 
 **Метрика качества**
 Результаты оцениваются по метрике MAPE.  
-MAPE  (Mean Percentage Absolute Error) расшифровывается выражение как средняя абсолютная ошибка в процентах.
+MAPE  (Mean Percentage Absolute Error) расшифровывается выражение как средняя абсолютная ошибка в процентах.  
 <img src="https://latex.codecogs.com/png.latex?\large&space;MAPE=\frac{1}{n}\sum_{t=1}^{n}\frac{\left&space;|&space;Y_t-\hat{Y_t}&space;\right&space;|}{Y_t}" title="\large MAPE=\frac{1}{n}\sum_{t=1}^{n}\frac{\left | Y_t-\hat{Y_t} \right |}{Y_t}" />
 ,  
 где:  
