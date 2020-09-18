@@ -4,13 +4,13 @@
 ![https://img.shields.io/badge/Python-3.7.4-blue](https://img.shields.io/badge/Python-3.7.4-blue)
 
 ## Оглавление  
-[1. Описание модуля](https://github.com/dst10rds6/rds6/blob/master/README.md#Описание-модуля)  
+[1. Описание проекта](https://github.com/dst10rds6/rds6/blob/master/README.md#Описание-проекта)  
 [2. Какой кейс решаем?](https://github.com/dst10rds6/rds6/blob/master/README.md#Какой-кейс-решаем?)  
 [3. Краткая информация о данных](https://github.com/dst10rds6/rds6/blob/master/README.md#Краткая-информация-о-данных)  
 [3. Этапы работы над проектом](https://github.com/dst10rds6/rds6/blob/master/README.md#Этапы-работы-над-проектом)  
 [4. Результат](https://github.com/dst10rds6/rds6/blob/master/README.md#Результат)  
 
-### Описание модуля  
+### Описание проекта  
 Вы работаете в компании, которая занимается продажей автомобилей с пробегом в Москве. В этом модуле вам предстоит выполнить просьбу руководства компании и создать модель, которая будет предсказывать стоимость автомобиля по его характеристикам  
 
 ***Чем мы будем заниматься?***  
