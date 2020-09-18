@@ -39,7 +39,7 @@
 **Метрика качества**
 Результаты оцениваются по метрике MAPE.  
 MAPE  (Mean Percentage Absolute Error) расшифровывается выражение как средняя абсолютная ошибка в процентах.
-$MAPE=\frac{1}{n}\sum_{t=1}^{n}\frac{\left | Y_t-\hat{Y_t} \right |}{Y_t}$
+<img src="https://latex.codecogs.com/gif.latex?MAPE=\frac{1}{n}\sum_{t=1}^{n}\frac{\left | Y_t-\hat{Y_t} \right |}{Y_t}" /> 
 ,  
 где:  
 - $Y_t$ — фактическое значение за анализируемый период;  
