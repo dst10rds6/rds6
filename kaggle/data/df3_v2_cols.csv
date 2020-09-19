@@ -1,0 +1,2 @@
+cat_cols,num_cols,servis_cols,bin_cols,target_col
+"bodyType,brand,color,fuelType,vehicleTransmission,Привод,ПТС,model2","mileage,modelDate,productionDate,enginePower,engineDisplacement2,engineDisplacement2_log,numberOfDoors,Владельцы,intensity,dateModelProdDiff,count_words_d,mean_c_w,sum_c_w","Train,id","rarity,pDate_more_2015,pDate_more_2005,pDate_more_1990,pDate_less_1990,c_p_des1,m_s_w_des2,r_l_s_des3,abs_des4,c_c_des5,a_w_des6,r_v_c_des7","price,price_log"
