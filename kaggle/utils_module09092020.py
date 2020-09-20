@@ -10,6 +10,7 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 from sklearn.metrics import confusion_matrix, balanced_accuracy_score, cohen_kappa_score
 from sklearn.metrics import precision_recall_curve
 from sklearn.metrics import plot_precision_recall_curve
+from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model import LogisticRegression
 import numpy as np
@@ -301,6 +302,94 @@ def ROC_curve_with_area(d_y_true, d_y_pred_prob, d_my_font_scale):
 def test_last_pred(d_y_true, d_y_pred, d_y_pred_prob):
     last_pred[0], last_pred[1], last_pred[2] = d_y_true, d_y_pred, d_y_pred_prob
     return
+
+
+
+def all_metrics_MAE_MPE_MAPE_WAPE_MSE_RMSE(d_y_true, d_y_pred):
+    
+    def MAE(y_true, y_pred):
+        '''
+        mean absolute error (средняя абсолютная ошибка)
+        '''
+        return np.mean(np.abs(y_true - y_pred))
+
+
+    def MPE(y_true, y_pred):
+        '''
+        mean percentage error (средняя процентная ошибка)
+        '''
+        return np.mean((y_true - y_pred) / y_true) * 100
+
+    
+    def MAPE(y_true, y_pred):
+        '''
+        mean absolute percentage error (средняя абсолютная процентная ошибка)
+        '''
+        return np.mean(np.abs((y_true - y_pred) / y_true)) * 100
+
+    
+    def SMAPE(y_true, y_pred):
+        '''
+        symmetric MAPE (симетричная средняя абсолютная процентная ошибка)
+        '''
+        return np.mean(2*np.abs(y_true - y_pred) / (np.abs(y_true)+np.abs(y_pred))) * 100
+    
+    def WMAPE(y_true, y_pred):
+        '''
+        weighted absolute percent error (взвешенная абсолютная процентная ошибка)
+        WMAPE / MAD-MEAN RATIO / WAPE — WEIGHTED ABSOLUTE PERCENT ERROR
+        '''
+        return np.mean(np.abs(y_true - y_pred)) / np.mean(y_true) * 100
+    
+
+    def RMSE(y_true, y_pred):
+        '''
+        root mean squared error (корень из среднеквадратичной ошибки)
+        '''
+        return mean_squared_error(y_true, y_pred)**0.5
+
+    
+    d_y_true_last, d_y_pred_last, d_y_pred_prob_last =  last_pred[0], last_pred[1], last_pred[2]
+    temp_dict = {}
+    temp1 = MAE(d_y_true, d_y_pred)
+    temp2 = MAE(d_y_true_last, d_y_pred_last)
+    temp_dict['MAE'] = [temp1, temp2-temp1,'mean absolute error (средняя абсолютная ошибка)']
+
+    temp1 = MPE(d_y_true, d_y_pred)
+    temp2 = MPE(d_y_true_last, d_y_pred_last)
+    temp_dict['MPE'] = [temp1, temp2-temp1,'mean percentage error (средняя процентная ошибка)']
+    
+    temp1 = MAPE(d_y_true, d_y_pred)
+    temp2 = MAPE(d_y_true_last, d_y_pred_last)
+    temp_dict['MAPE'] = [temp1, temp2-temp1,'mean absolute percentage error (средняя абсолютная процентная ошибка)']
+    
+    temp1 = SMAPE(d_y_true, d_y_pred)
+    temp2 = SMAPE(d_y_true_last, d_y_pred_last)
+    temp_dict['SMAPE'] = [temp1, temp2-temp1,'symmetric MAPE (симетричная средняя абсолютная процентная ошибка)']    
+    
+    temp1 = WMAPE(d_y_true, d_y_pred)
+    temp2 = WMAPE(d_y_true_last, d_y_pred_last)
+    temp_dict['WMAPE'] = [temp1, temp2-temp1,'weighted absolute percent error (взвешенная абсолютная процентная ошибка)']
+    
+    temp1 = mean_squared_error(d_y_true, d_y_pred)
+    temp2 = mean_squared_error(d_y_true_last, d_y_pred_last)
+    temp_dict['MSE'] = [temp1, temp2-temp1,'mean squared error (среднеквадратичная ошибка)']
+    
+    temp1 = RMSE(d_y_true, d_y_pred)
+    temp2 = RMSE(d_y_true_last, d_y_pred_last)
+    temp_dict['RMSE'] = [temp1, temp2-temp1,'root mean squared error (корень из среднеквадратичной ошибки)']    
+    
+    temp1 = r2_score(d_y_true, d_y_pred)
+    temp2 = r2_score(d_y_true_last, d_y_pred_last)
+    temp_dict['R2'] = [temp1, temp2-temp1,'coefficient of determination (коэффициент детерминации)']    
+    
+    temp_df = pd.DataFrame.from_dict(temp_dict, orient='index', columns=['Значение','Дельта с предыдущим','Описание'])
+    display(temp_df)
+
+    last_pred[0], last_pred[1] = d_y_true, d_y_pred
+
+    return
+
 
 def all_metrics(d_y_true, d_y_pred, d_y_pred_prob):
         
