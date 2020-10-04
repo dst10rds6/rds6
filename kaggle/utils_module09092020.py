@@ -23,6 +23,20 @@ import os
 
 global last_pred
 
+def result_EDA_feature(d_feature, d_train, d_test, d_n_cols, d_EDA_done_cols, d_old_len_train):
+    # записываем признак в список проанализированных признаков
+    d_EDA_done_cols.append(d_feature)
+    d_len_ = len(d_EDA_done_cols)
+    print(f'В результате после EDA признака:= {d_feature}, обработано признаков:= {d_len_}, осталось:= {d_n_cols-d_len_}')
+    # смотрим как ведет себя трейн
+    temp = len(d_train)
+    print('Кол-во строк в трейне:= ', temp, '. Убрали на данном шаге:= ', d_old_len_train-temp)
+    d_old_len_train = temp
+    # проверяем что мы случайно не испортили тест
+    print('Кол-во строк в тесте:= ', len(d_test))
+    return d_old_len_train, d_EDA_done_cols
+
+
 def nunique_not_found(d_df1, d_df2, d_col):
 
     temp_set = set()
@@ -306,7 +320,20 @@ def test_last_pred(d_y_true, d_y_pred, d_y_pred_prob):
 
 
 def all_metrics_MAE_MPE_MAPE_WAPE_MSE_RMSE(d_y_true, d_y_pred):
-    
+    def r_(d_x):
+        '''
+        short code for def round
+        '''
+        return round(d_x,6)
+
+
+    def r_p(d_x):
+        '''
+        short code for def round procent
+        '''
+        return round(d_x,4)
+
+
     def MAE(y_true, y_pred):
         '''
         mean absolute error (средняя абсолютная ошибка)
@@ -351,37 +378,37 @@ def all_metrics_MAE_MPE_MAPE_WAPE_MSE_RMSE(d_y_true, d_y_pred):
     
     d_y_true_last, d_y_pred_last, d_y_pred_prob_last =  last_pred[0], last_pred[1], last_pred[2]
     temp_dict = {}
-    temp1 = MAE(d_y_true, d_y_pred)
-    temp2 = MAE(d_y_true_last, d_y_pred_last)
-    temp_dict['MAE'] = [temp1, temp2-temp1,'mean absolute error (средняя абсолютная ошибка)']
+    temp1 = r_(MAE(d_y_true, d_y_pred))
+    temp2 = r_(MAE(d_y_true_last, d_y_pred_last))
+    temp_dict['MAE'] = [temp1, temp1-temp2,'mean absolute error (средняя абсолютная ошибка)']
 
-    temp1 = MPE(d_y_true, d_y_pred)
-    temp2 = MPE(d_y_true_last, d_y_pred_last)
-    temp_dict['MPE'] = [temp1, temp2-temp1,'mean percentage error (средняя процентная ошибка)']
+    temp1 = r_p(MPE(d_y_true, d_y_pred))
+    temp2 = r_p(MPE(d_y_true_last, d_y_pred_last))
+    temp_dict['MPE'] = [temp1, temp1-temp2,'(%) mean percentage error (средняя процентная ошибка)']
     
-    temp1 = MAPE(d_y_true, d_y_pred)
-    temp2 = MAPE(d_y_true_last, d_y_pred_last)
-    temp_dict['MAPE'] = [temp1, temp2-temp1,'mean absolute percentage error (средняя абсолютная процентная ошибка)']
+    temp1 = r_p(MAPE(d_y_true, d_y_pred))
+    temp2 = r_p(MAPE(d_y_true_last, d_y_pred_last))
+    temp_dict['MAPE'] = [temp1, temp1-temp2,'(%) mean absolute percentage error (средняя абсолютная процентная ошибка)']
     
-    temp1 = SMAPE(d_y_true, d_y_pred)
-    temp2 = SMAPE(d_y_true_last, d_y_pred_last)
-    temp_dict['SMAPE'] = [temp1, temp2-temp1,'symmetric MAPE (симетричная средняя абсолютная процентная ошибка)']    
+    temp1 = r_p(SMAPE(d_y_true, d_y_pred))
+    temp2 = r_p(SMAPE(d_y_true_last, d_y_pred_last))
+    temp_dict['SMAPE'] = [temp1, temp1-temp2,'(%) symmetric MAPE (симетричная средняя абсолютная процентная ошибка)']    
     
-    temp1 = WMAPE(d_y_true, d_y_pred)
-    temp2 = WMAPE(d_y_true_last, d_y_pred_last)
-    temp_dict['WMAPE'] = [temp1, temp2-temp1,'weighted absolute percent error (взвешенная абсолютная процентная ошибка)']
+    temp1 = r_p(WMAPE(d_y_true, d_y_pred))
+    temp2 = r_p(WMAPE(d_y_true_last, d_y_pred_last))
+    temp_dict['WMAPE'] = [temp1, temp1-temp2,'(%) weighted absolute percent error (взвешенная абсолютная процентная ошибка)']
     
-    temp1 = mean_squared_error(d_y_true, d_y_pred)
-    temp2 = mean_squared_error(d_y_true_last, d_y_pred_last)
-    temp_dict['MSE'] = [temp1, temp2-temp1,'mean squared error (среднеквадратичная ошибка)']
+    temp1 = r_(mean_squared_error(d_y_true, d_y_pred))
+    temp2 = r_(mean_squared_error(d_y_true_last, d_y_pred_last))
+    temp_dict['MSE'] = [temp1, temp1-temp2,'mean squared error (среднеквадратичная ошибка)']
     
-    temp1 = RMSE(d_y_true, d_y_pred)
-    temp2 = RMSE(d_y_true_last, d_y_pred_last)
-    temp_dict['RMSE'] = [temp1, temp2-temp1,'root mean squared error (корень из среднеквадратичной ошибки)']    
+    temp1 = r_(RMSE(d_y_true, d_y_pred))
+    temp2 = r_(RMSE(d_y_true_last, d_y_pred_last))
+    temp_dict['RMSE'] = [temp1, temp1-temp2,'root mean squared error (корень из среднеквадратичной ошибки)']    
     
-    temp1 = r2_score(d_y_true, d_y_pred)
-    temp2 = r2_score(d_y_true_last, d_y_pred_last)
-    temp_dict['R2'] = [temp1, temp2-temp1,'coefficient of determination (коэффициент детерминации)']    
+    temp1 = r_(r2_score(d_y_true, d_y_pred))
+    temp2 = r_(r2_score(d_y_true_last, d_y_pred_last))
+    temp_dict['R2'] = [temp1, temp1-temp2,'coefficient of determination (коэффициент детерминации)']    
     
     temp_df = pd.DataFrame.from_dict(temp_dict, orient='index', columns=['Значение','Дельта с предыдущим','Описание'])
     display(temp_df)
